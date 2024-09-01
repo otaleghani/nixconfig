@@ -22,10 +22,4 @@ in {
       ];
     };
   };
-
-  # home.file."./.config/hypr/hyprpaper.conf".text = ''
-  #   preload = ~/.config/wallpapers/${wallpaper}
-  #   wallpaper = ~/.config/wallpapers/${wallpaper}
-  #   splash = false
-  # '';
 }
