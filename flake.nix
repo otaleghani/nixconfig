@@ -14,7 +14,7 @@
       default = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
         modules = [
-          ./hosts/default/configuration.nix
+          ./hosts/gs65/default/configuration.nix
           inputs.home-manager.nixosModules.default
         ];
       };
