@@ -1,6 +1,17 @@
 # Personal nix flake configuration
 
-## Hosts
+## File structure
 
-### minerva
-Daily driver.
+### /nixos
+
+#### /nixos/modules
+Modules related to NixOs
+
+#### /nixos/packages
+Packages to install, divided by categories
+
+### /hosts
+Different hosts that I use
+
+### /home-manager
+Different home manager configuration that I use

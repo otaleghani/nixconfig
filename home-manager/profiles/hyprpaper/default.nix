@@ -1,3 +1,5 @@
+#https://mynixos.com/home-manager/options/services.hyprpaper
+
 { config, pkgs, ... }: 
 let
   wallpaper = "001.jpg";

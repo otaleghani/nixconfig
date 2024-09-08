@@ -1,3 +1,4 @@
+# https://mynixos.com/home-manager/options/wayland.windowManager.hyprland
 { config, pkgs, ... }: {
   programs = {
     bash = {
@@ -60,10 +61,10 @@
         "gaps_in" = "4";
         "gaps_out" = "6";
         "gaps_workspaces" = "0";
-        "col.inactive_border" = "$base04";
-        "col.active_border" = "$base0C $base1C";
-        "col.nogroup_border" = "$base04";
-        "col.nogroup_border_active" = "$base04";
+        "col.inactive_border" = "$surface02";
+        "col.active_border" = "$indigo $indigo_b";
+        "col.nogroup_border" = "$surface02";
+        "col.nogroup_border_active" = "$surface02";
         "layout" = "dwindle";
         "no_focus_fallback" = "false";
         "apply_sens_to_raw" = "false";
@@ -334,8 +335,190 @@
         "always_center_master" = "false";
         "smart_resizing" = "true";
         "drop_at_cursor" = "true";
-        "" = "";
       };
+
+      [
+        # Base
+        "$mod, Return, exec, kitty"  
+        "$mod SHIFT, Return, exec, kitty"
+        "$mod SHIFT, P, killactive"
+        "$mod SHIFT, Q, exit"
+        "$mod SHIFT, Space, togglefloating"
+        "$mod, F, fullscreen"
+        "$mod, Y, pin"
+        "$mod, P, pseudo"
+        "$mod, C, togglesplit"
+
+        # Group
+        "$mod, K, togglegroup,"
+        "$mod, Tab, changegroupactive, f"
+
+        # Gaps
+        "$mod SHIFT, G,exec,hyprctl --batch 'keyword general:gaps_out 5;keyword general:gaps_in 3'"
+        "$mod , G,exec,hyprctl --batch 'keyword general:gaps_out 0;keyword general:gaps_in 0'"
+
+        # Focus
+        "$mod, H, movefocus, l"
+        "$mod, L, movefocus, r"
+        "$mod, K, movefocus, u"
+        "$mod, J, movefocus, d"
+
+        # Workspaces
+        "$mod, 1, workspace, 1"
+        "$mod, 2, workspace, 2"
+        "$mod, 3, workspace, 3"
+        "$mod, 4, workspace, 4"
+        "$mod, 5, workspace, 5"
+        "$mod, 6, workspace, 6"
+        "$mod, 7, workspace, 7"
+        "$mod, 8, workspace, 8"
+        "$mod, 9, workspace, 9"
+        "$mod, 0, workspace, 10"
+        # "$mod, L, workspace, +1"
+        # "$mod, H, workspace, -1"
+        "$mod, period, workspace, e+1"
+        "$mod, comma, workspace, e-1"
+
+        # Scratchpad
+        "$mod, Z, movetoworkspace,special"
+        "$mod, X, togglespecialworkspace"
+
+        # Window movement in workspace
+        "$mod SHIFT, H, movewindow, l"
+        "$mod SHIFT, L, movewindow, r"
+        "$mod SHIFT, K, movewindow, u"
+        "$mod SHIFT, J, movewindow, d"
+
+        # Window movement between workspaces
+        "$mod CTRL, 1, movetoworkspace, 1"
+        "$mod CTRL, 2, movetoworkspace, 2"
+        "$mod CTRL, 3, movetoworkspace, 3"
+        "$mod CTRL, 4, movetoworkspace, 4"
+        "$mod CTRL, 5, movetoworkspace, 5"
+        "$mod CTRL, 6, movetoworkspace, 6"
+        "$mod CTRL, 7, movetoworkspace, 7"
+        "$mod CTRL, 8, movetoworkspace, 8"
+        "$mod CTRL, 9, movetoworkspace, 9"
+        "$mod CTRL, 0, movetoworkspace, 10"
+        "$mod CTRL, left, movetoworkspace, -1"
+        "$mod CTRL, right, movetoworkspace, +1"
+        # same as above, but doesnt switch to the workspace
+        "$mod SHIFT, 1, movetoworkspacesilent, 1"
+        "$mod SHIFT, 2, movetoworkspacesilent, 2"
+        "$mod SHIFT, 3, movetoworkspacesilent, 3"
+        "$mod SHIFT, 4, movetoworkspacesilent, 4"
+        "$mod SHIFT, 5, movetoworkspacesilent, 5"
+        "$mod SHIFT, 6, movetoworkspacesilent, 6"
+        "$mod SHIFT, 7, movetoworkspacesilent, 7"
+        "$mod SHIFT, 8, movetoworkspacesilent, 8"
+        "$mod SHIFT, 9, movetoworkspacesilent, 9"
+        "$mod SHIFT, 0, movetoworkspacesilent, 10"
+        # Scroll through existing workspaces with mod + scroll
+        "$mod, mouse_down, workspace, e+1"
+        "$mod, mouse_up, workspace, e-1"
+
+        # Program lanch
+        "$mod, B, exec, [workspace 2] firefox"
+        "$mod, M, exec, [workspace 9] hyprctl dispatch exec -- [workspace 9] kitty -e spotify_player"
+        "$mod, T, exec, [workspace 1] hyprctl dispatch exec -- [workspace 1] kitty -e cd $(find * -type d | fzf) && tmux"
+
+
+        # Volume, brightness, media player
+        # ",XF87AudioRaiseVolume,exec, pamixer -i 5"
+        # ",XF86AudioLowerVolume,exec, pamixer -d 5"
+        # ",XF86AudioMute,exec, pamixer -t"
+        # ",XF86AudioMicMute,exec, pamixer --default-source -t"
+        # ",XF86MonBrightnessUp,exec, light -A 5"
+        # ",XF86MonBrightnessDown, exec, light -U 5"
+        # ",XF86AudioPlay,exec, mpc -q toggle "
+        # ",XF86AudioNext,exec, mpc -q next "
+        # ",XF86AudioPrev,exec, mpc -q prev"
+
+        # Waybar toggle
+        "$mod,W,exec,killall -SIGUSR1 .waybar-wrapped"
+
+        # Window resize
+        "ALT,R,submap,resize"
+        "submap=resize"
+        "binde=,right,resizeactive,15 0"
+        "binde=,left,resizeactive,-15 0"
+        "binde=,up,resizeactive,0 -15"
+        "binde=,down,resizeactive,0 15"
+        "binde=,l,resizeactive,15 0"
+        "binde=,h,resizeactive,-15 0"
+        "binde=,k,resizeactive,0 -15"
+        "binde=,j,resizeactive,0 15"
+        ",escape,submap,reset "
+        "submap=reset"
+
+        "CTRL SHIFT, left, resizeactive,-15 0"
+        "CTRL SHIFT, right, resizeactive,15 0"
+        "CTRL SHIFT, up, resizeactive,0 -15"
+        "CTRL SHIFT, down, resizeactive,0 15"
+        "CTRL SHIFT, l, resizeactive, 15 0"
+        "CTRL SHIFT, h, resizeactive,-15 0"
+        "CTRL SHIFT, k, resizeactive, 0 -15"
+        "CTRL SHIFT, j, resizeactive, 0 15"
+
+        "$mod, mouse:272, movewindow"
+        "$mod, mouse:273, resizewindow"
+
+        # Rofi 
+        "CTRL SHIFT, Return, exec, rofi -show drun"
+        "CTRL SHIFT, Backspace, exec, ~/.config/scripts/power.sh"
+        "CTRL SHIFT, W, exec, ~/.config/scripts/wifi.sh"
+        "CTRL SHIFT, B, exec, ~/.config/scripts/bluetooth.sh"
+      ];
+
+      exec-once = [
+        "waybar &"
+        "mako &"
+        "hyprpaper &"
+        "wal -R &"
+        "~/.config/autostart/spotify-player.sh &"
+        "hyprctl dispatch moveworkspacetomonitor 1 eDP-1 && sleep 1 && ~/Automations/opentodo.sh"
+      ];
+
+      windowrule = [
+        # "opacity 1 override 0.8 override,^(kitty)$"
+        # "float,title:^(Picture-in-Picture)$"
+        # "size 960 540,title:^(Picture-in-Picture)$"
+        # "move 25%-,title:^(Picture-in-Picture)$"
+        # "float,imv"
+        # "move 25%-,imv"
+        # "size 960 540,imv"
+        # "float,mpv"
+        # "move 25%-,mpv"
+        # "size 960 540,mpv"
+        # "float,danmufloat"
+        # "move 25%-,danmufloat"
+        # "pin,danmufloat"
+        # "rounding 5,danmufloat"
+        # "size 960 540,danmufloat"
+        # "float,termfloat"
+        # "move 25%-,termfloat"
+        # "size 960 540,termfloat"
+        # "rounding 5,termfloat"
+        # "float,nemo"
+        # "move 25%-,nemo"
+        # "size 960 540,nemo"
+        # "opacity 0.95,title:Telegram"
+        # "opacity 0.95,title:QQ"
+        # "opacity 0.95,title:NetEase Cloud Music Gtk4"
+        # "animation slide right,kitty"
+        # "workspace name:QQ, title:Icalingua++"
+        # "workspace name:TG, title:Telegram"
+        # "workspace name:Music, title:NetEase Cloud Music Gtk4"
+        # "workspace name:Music, musicfox"
+        # "float,ncmpcpp"
+        # "move 25%-,ncmpcpp"
+        # "size 960 540,ncmpcpp"
+        # "noblur,^(firefox)$"
+      ];
+
+      workspace = [
+        "HDMI-A-1,10"
+      ];
     ];
 
     # Commands after initialization
